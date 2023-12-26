@@ -55,10 +55,28 @@ void UNIT_QRCODE::setDecodeTrigger(bool en) {
     writeBytes(_addr, UNIT_QRCODE_TRIGGER_REG, (uint8_t *)&en, 1);
 }
 
+void UNIT_QRCODE::setTriggerMode(bool mode) {
+    writeBytes(_addr, UNIT_QRCODE_TRIGGER_MODE_REG, (uint8_t *)&mode, 1);
+}
+
+uint8_t UNIT_QRCODE::getTriggerMode(void) {
+    uint8_t value = 0;
+
+    readBytes(_addr, UNIT_QRCODE_TRIGGER_MODE_REG, (uint8_t *)&value, 1);
+    return value;
+}
+
 uint8_t UNIT_QRCODE::getDecodeReadyStatus(void) {
     uint8_t value = 0;
 
     readBytes(_addr, UNIT_QRCODE_READY_REG, (uint8_t *)&value, 1);
+    return value;
+}
+
+uint8_t UNIT_QRCODE::getTriggerKeyStatus(void) {
+    uint8_t value = 0;
+
+    readBytes(_addr, UNIT_QRCODE_TRIGGER_KEY_REG, (uint8_t *)&value, 1);
     return value;
 }
 

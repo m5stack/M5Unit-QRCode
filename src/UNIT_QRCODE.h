@@ -4,11 +4,13 @@
 #include "Arduino.h"
 #include "Wire.h"
 
-#define UNIT_QRCODE_ADDR        0x21
-#define UNIT_QRCODE_TRIGGER_REG 0x0000
-#define UNIT_QRCODE_READY_REG   0x0010
-#define UNIT_QRCODE_LENGTH_REG  0x0020
-#define UNIT_QRCODE_DATA_REG    0x1000
+#define UNIT_QRCODE_ADDR             0x21
+#define UNIT_QRCODE_TRIGGER_REG      0x0000
+#define UNIT_QRCODE_READY_REG        0x0010
+#define UNIT_QRCODE_LENGTH_REG       0x0020
+#define UNIT_QRCODE_TRIGGER_MODE_REG 0x0030
+#define UNIT_QRCODE_TRIGGER_KEY_REG  0x0040
+#define UNIT_QRCODE_DATA_REG         0x1000
 
 #define JUMP_TO_BOOTLOADER_REG 0x00FD
 #define FIRMWARE_VERSION_REG   0x00FE
@@ -37,6 +39,9 @@ class UNIT_QRCODE {
     uint8_t getDecodeReadyStatus(void);
     uint16_t getDecodeLength(void);
     void getDecodeData(uint8_t *data, uint16_t len);
+    void setTriggerMode(bool mode);
+    uint8_t getTriggerMode(void);
+    uint8_t getTriggerKeyStatus(void);
 };
 
 #endif
