@@ -32,24 +32,18 @@ void setup() {
     canvas.setTextScroll(true);
 
     while (!qrcode.begin(&Serial2, UNIT_QRCODE_UART_BAUD, 16, 17)) {
-        canvas.printf("Unit QRCode Init Fail\r\n", M5.Display.width() / 2,
-                      M5.Display.height() / 2);
-        Serial.println("Unit QRCode Init Fail");
+        canvas.println("Unit QRCode UART Init Fail");
+        Serial.println("Unit QRCode UART Init Fail");
         canvas.pushSprite(0, 0);
         delay(1000);
     }
-
+    canvas.println("Unit QRCode UART Init Success");
+    Serial.println("Unit QRCode UART Init Success");
 #ifdef UART_AUTO_SCAN_MODE
-    canvas.printf("Unit QRCode Init Success\r\n", M5.Display.width() / 2,
-                  M5.Display.height() / 2);
-    Serial.println("Unit QRCode Init Success");
     canvas.println("Auto Scan Mode");
     canvas.pushSprite(0, 0);
     qrcode.setTriggerMode(AUTO_SCAN_MODE);
 #else
-    canvas.printf("Unit QRCode Init Success\r\n", M5.Display.width() / 2,
-                  M5.Display.height() / 2);
-    Serial.println("Unit QRCode Init Success");
     canvas.println("Manual Scan Mode");
     canvas.pushSprite(0, 0);
     qrcode.setTriggerMode(MANUAL_SCAN_MODE);
@@ -62,8 +56,8 @@ void loop() {
         uint16_t length = data.length();
         Serial.printf("len:%d\r\n", length);
         Serial.printf("decode data:");
-        Serial.printf("%s", data);
-        canvas.printf("%s", data);
+        Serial.println(data);
+        canvas.println(data);
         Serial.println();
         canvas.println();
         canvas.pushSprite(0, 0);

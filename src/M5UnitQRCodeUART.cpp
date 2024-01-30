@@ -12,8 +12,8 @@ bool M5UnitQRCodeUART::begin(HardwareSerial *serial, int baud, uint8_t RX,
         _rx_buffer[_index] = _serial->read();
         _index++;
     }
-    if (_rx_buffer[0] == 0x24 &&
-        _rx_buffer[1] == 0x61 & _rx_buffer[2] == 0x41) {
+    if (_rx_buffer[0] == 0x24 && _rx_buffer[1] == 0x61 &&
+        _rx_buffer[2] == 0x41) {
         clear();
         return true;
     }

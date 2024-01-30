@@ -32,24 +32,19 @@ void setup() {
     canvas.setTextScroll(true);
 
     while (!qrcode.begin(&Wire, UNIT_QRCODE_ADDR, 21, 22, 100000U)) {
-        canvas.printf("Unit QRCode Init Fail\r\n", M5.Display.width() / 2,
-                      M5.Display.height() / 2);
-        Serial.println("Unit QRCode Init Fail");
+        canvas.println("Unit QRCode I2C Init Fail");
+        Serial.println("Unit QRCode I2C Init Fail");
         canvas.pushSprite(0, 0);
         delay(1000);
     }
 
+    canvas.println("Unit QRCode I2C Init Success");
+    Serial.println("Unit QRCode I2C Init Success");
 #ifdef I2C_AUTO_SCAN_MODE
-    canvas.printf("Unit QRCode Init Success\r\n", M5.Display.width() / 2,
-                  M5.Display.height() / 2);
-    Serial.println("Unit QRCode Init Success");
     canvas.println("Auto Scan Mode");
     canvas.pushSprite(0, 0);
     qrcode.setTriggerMode(AUTO_SCAN_MODE);
 #else
-    canvas.printf("Unit QRCode Init Success\r\n", M5.Display.width() / 2,
-                  M5.Display.height() / 2);
-    Serial.println("Unit QRCode Init Success");
     canvas.println("Manual Scan Mode");
     canvas.pushSprite(0, 0);
     qrcode.setTriggerMode(MANUAL_SCAN_MODE);
