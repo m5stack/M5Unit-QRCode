@@ -1,7 +1,7 @@
-#include "UNIT_QRCODE.h"
+#include "M5UnitQRCodeI2C.h"
 
-void UNIT_QRCODE::writeBytes(uint8_t addr, uint16_t reg, uint8_t *buffer,
-                             uint8_t length) {
+void M5UnitQRCodeI2C::writeBytes(uint8_t addr, uint16_t reg, uint8_t *buffer,
+                                 uint8_t length) {
     uint8_t temp[2];
 
     temp[0] = (reg & 0x00ff);
@@ -16,8 +16,8 @@ void UNIT_QRCODE::writeBytes(uint8_t addr, uint16_t reg, uint8_t *buffer,
     _wire->endTransmission();
 }
 
-void UNIT_QRCODE::readBytes(uint8_t addr, uint16_t reg, uint8_t *buffer,
-                            uint16_t length) {
+void M5UnitQRCodeI2C::readBytes(uint8_t addr, uint16_t reg, uint8_t *buffer,
+                                uint16_t length) {
     uint8_t temp[2];
 
     temp[0] = (reg & 0x00ff);
@@ -33,8 +33,8 @@ void UNIT_QRCODE::readBytes(uint8_t addr, uint16_t reg, uint8_t *buffer,
     }
 }
 
-bool UNIT_QRCODE::begin(TwoWire *wire, uint8_t addr, uint8_t sda, uint8_t scl,
-                        uint32_t speed) {
+bool M5UnitQRCodeI2C::begin(TwoWire *wire, uint8_t addr, uint8_t sda,
+                            uint8_t scl, uint32_t speed) {
     _wire  = wire;
     _addr  = addr;
     _sda   = sda;
@@ -51,53 +51,53 @@ bool UNIT_QRCODE::begin(TwoWire *wire, uint8_t addr, uint8_t sda, uint8_t scl,
     }
 }
 
-void UNIT_QRCODE::setDecodeTrigger(bool en) {
+void M5UnitQRCodeI2C::setDecodeTrigger(bool en) {
     writeBytes(_addr, UNIT_QRCODE_TRIGGER_REG, (uint8_t *)&en, 1);
 }
 
-void UNIT_QRCODE::setTriggerMode(bool mode) {
+void M5UnitQRCodeI2C::setTriggerMode(qrcode_scan_mode_t mode) {
     writeBytes(_addr, UNIT_QRCODE_TRIGGER_MODE_REG, (uint8_t *)&mode, 1);
 }
 
-uint8_t UNIT_QRCODE::getTriggerMode(void) {
+uint8_t M5UnitQRCodeI2C::getTriggerMode(void) {
     uint8_t value = 0;
 
     readBytes(_addr, UNIT_QRCODE_TRIGGER_MODE_REG, (uint8_t *)&value, 1);
     return value;
 }
 
-uint8_t UNIT_QRCODE::getDecodeReadyStatus(void) {
+uint8_t M5UnitQRCodeI2C::getDecodeReadyStatus(void) {
     uint8_t value = 0;
 
     readBytes(_addr, UNIT_QRCODE_READY_REG, (uint8_t *)&value, 1);
     return value;
 }
 
-uint8_t UNIT_QRCODE::getTriggerKeyStatus(void) {
+uint8_t M5UnitQRCodeI2C::getTriggerKeyStatus(void) {
     uint8_t value = 0;
 
     readBytes(_addr, UNIT_QRCODE_TRIGGER_KEY_REG, (uint8_t *)&value, 1);
     return value;
 }
 
-uint16_t UNIT_QRCODE::getDecodeLength(void) {
+uint16_t M5UnitQRCodeI2C::getDecodeLength(void) {
     uint16_t value = 0;
 
     readBytes(_addr, UNIT_QRCODE_LENGTH_REG, (uint8_t *)&value, 2);
     return value;
 }
 
-void UNIT_QRCODE::getDecodeData(uint8_t *data, uint16_t len) {
+void M5UnitQRCodeI2C::getDecodeData(uint8_t *data, uint16_t len) {
     readBytes(_addr, UNIT_QRCODE_DATA_REG, data, len);
 }
 
-void UNIT_QRCODE::jumpBootloader(void) {
+void M5UnitQRCodeI2C::jumpBootloader(void) {
     uint8_t value = 1;
 
     writeBytes(_addr, JUMP_TO_BOOTLOADER_REG, (uint8_t *)&value, 1);
 }
 
-uint8_t UNIT_QRCODE::setI2CAddress(uint8_t addr) {
+uint8_t M5UnitQRCodeI2C::setI2CAddress(uint8_t addr) {
     uint8_t temp[2] = {0};
 
     temp[0] = I2C_ADDRESS_REG;
@@ -112,7 +112,7 @@ uint8_t UNIT_QRCODE::setI2CAddress(uint8_t addr) {
     return _addr;
 }
 
-uint8_t UNIT_QRCODE::getI2CAddress(void) {
+uint8_t M5UnitQRCodeI2C::getI2CAddress(void) {
     uint8_t temp[2] = {0};
 
     temp[0] = I2C_ADDRESS_REG;
@@ -130,7 +130,7 @@ uint8_t UNIT_QRCODE::getI2CAddress(void) {
     return RegValue;
 }
 
-uint8_t UNIT_QRCODE::getFirmwareVersion(void) {
+uint8_t M5UnitQRCodeI2C::getFirmwareVersion(void) {
     uint8_t temp[2] = {0};
 
     temp[0] = FIRMWARE_VERSION_REG;

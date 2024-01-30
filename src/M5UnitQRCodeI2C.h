@@ -1,6 +1,7 @@
-#ifndef __UNIT_QRCODE_H
-#define __UNIT_QRCODE_H
+#ifndef _UNIT_QRCODE_I2C_H_
+#define _UNIT_QRCODE_I2C_H_
 
+#include "M5UnitQRCode.h"
 #include "Arduino.h"
 #include "Wire.h"
 
@@ -16,7 +17,7 @@
 #define FIRMWARE_VERSION_REG   0x00FE
 #define I2C_ADDRESS_REG        0x00FF
 
-class UNIT_QRCODE {
+class M5UnitQRCodeI2C {
    private:
     uint8_t _addr;
     TwoWire *_wire;
@@ -39,7 +40,7 @@ class UNIT_QRCODE {
     uint8_t getDecodeReadyStatus(void);
     uint16_t getDecodeLength(void);
     void getDecodeData(uint8_t *data, uint16_t len);
-    void setTriggerMode(bool mode);
+    void setTriggerMode(qrcode_scan_mode_t mode);
     uint8_t getTriggerMode(void);
     uint8_t getTriggerKeyStatus(void);
 };
