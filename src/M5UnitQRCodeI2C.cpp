@@ -1,7 +1,12 @@
+/*
+ * SPDX-FileCopyrightText: 2024 M5Stack Technology CO LTD
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 #include "M5UnitQRCodeI2C.h"
 
-void M5UnitQRCodeI2C::writeBytes(uint8_t addr, uint16_t reg, uint8_t *buffer,
-                                 uint8_t length) {
+void M5UnitQRCodeI2C::writeBytes(uint8_t addr, uint16_t reg, uint8_t *buffer, uint8_t length) {
     uint8_t temp[2];
 
     temp[0] = (reg & 0x00ff);
@@ -16,8 +21,7 @@ void M5UnitQRCodeI2C::writeBytes(uint8_t addr, uint16_t reg, uint8_t *buffer,
     _wire->endTransmission();
 }
 
-void M5UnitQRCodeI2C::readBytes(uint8_t addr, uint16_t reg, uint8_t *buffer,
-                                uint16_t length) {
+void M5UnitQRCodeI2C::readBytes(uint8_t addr, uint16_t reg, uint8_t *buffer, uint16_t length) {
     uint8_t temp[2];
 
     temp[0] = (reg & 0x00ff);
@@ -33,8 +37,7 @@ void M5UnitQRCodeI2C::readBytes(uint8_t addr, uint16_t reg, uint8_t *buffer,
     }
 }
 
-bool M5UnitQRCodeI2C::begin(TwoWire *wire, uint8_t addr, uint8_t sda,
-                            uint8_t scl, uint32_t speed) {
+bool M5UnitQRCodeI2C::begin(TwoWire *wire, uint8_t addr, uint8_t sda, uint8_t scl, uint32_t speed) {
     _wire  = wire;
     _addr  = addr;
     _sda   = sda;

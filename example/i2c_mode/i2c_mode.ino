@@ -1,18 +1,24 @@
+/*
+ * SPDX-FileCopyrightText: 2024 M5Stack Technology CO LTD
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 /**
  * @file i2c_mode.ino
- * @author SeanKwok (shaoxiang@m5stack.com)
  * @brief Unit QRCode I2C Mode Example
- * @version 0.1
- * @date 2024-01-30
+ * @version 0.2
+ * @date 2024-06-19
  *
  *
- * @Hardwares: M5Core + Unit Synth
+ * @Hardwares: M5Core + Unit QRCode
  * @Platform Version: Arduino M5Stack Board Manager v2.1.0
  * @Dependent Library:
  * M5Unified: https://github.com/m5stack/M5Unified
  * M5GFX: https://github.com/m5stack/M5GFX
  * M5UnitQRCode: https://github.com/m5stack/M5Unit-QRCode
  */
+
 #include <M5Unified.h>
 #include <M5GFX.h>
 #include "M5UnitQRCode.h"

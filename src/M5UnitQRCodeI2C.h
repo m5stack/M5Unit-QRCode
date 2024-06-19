@@ -1,3 +1,9 @@
+/*
+ * SPDX-FileCopyrightText: 2024 M5Stack Technology CO LTD
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 #ifndef _UNIT_QRCODE_I2C_H_
 #define _UNIT_QRCODE_I2C_H_
 
@@ -24,14 +30,12 @@ class M5UnitQRCodeI2C {
     uint8_t _scl;
     uint8_t _sda;
     uint8_t _speed;
-    void writeBytes(uint8_t addr, uint16_t reg, uint8_t *buffer,
-                    uint8_t length);
-    void readBytes(uint8_t addr, uint16_t reg, uint8_t *buffer,
-                   uint16_t length);
+    void writeBytes(uint8_t addr, uint16_t reg, uint8_t *buffer, uint8_t length);
+    void readBytes(uint8_t addr, uint16_t reg, uint8_t *buffer, uint16_t length);
 
    public:
-    bool begin(TwoWire *wire = &Wire, uint8_t addr = UNIT_QRCODE_ADDR,
-               uint8_t sda = 21, uint8_t scl = 22, uint32_t speed = 100000L);
+    bool begin(TwoWire *wire = &Wire, uint8_t addr = UNIT_QRCODE_ADDR, uint8_t sda = 21, uint8_t scl = 22,
+               uint32_t speed = 100000L);
     uint8_t getFirmwareVersion(void);
     void jumpBootloader(void);
     uint8_t setI2CAddress(uint8_t addr);

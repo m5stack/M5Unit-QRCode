@@ -1,3 +1,9 @@
+/*
+ * SPDX-FileCopyrightText: 2024 M5Stack Technology CO LTD
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 #ifndef _UNIT_QRCODE_UART_H_
 #define _UNIT_QRCODE_UART_H_
 
@@ -15,9 +21,7 @@ class M5UnitQRCodeUART {
     String _data;
 
    public:
-    bool begin(HardwareSerial *serial = &Serial2,
-               int baud = UNIT_QRCODE_UART_BAUD, uint8_t RX = 16,
-               uint8_t TX = 17);
+    bool begin(HardwareSerial *serial = &Serial2, int baud = UNIT_QRCODE_UART_BAUD, uint8_t RX = 16, uint8_t TX = 17);
     void setDecodeTrigger(bool en);
     void setTriggerMode(qrcode_scan_mode_t mode);
     bool available(void);

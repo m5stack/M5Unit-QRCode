@@ -1,7 +1,12 @@
+/*
+ * SPDX-FileCopyrightText: 2024 M5Stack Technology CO LTD
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 #include "M5UnitQRCodeUART.h"
 
-bool M5UnitQRCodeUART::begin(HardwareSerial *serial, int baud, uint8_t RX,
-                             uint8_t TX) {
+bool M5UnitQRCodeUART::begin(HardwareSerial *serial, int baud, uint8_t RX, uint8_t TX) {
     _serial = serial;
     _serial->begin(baud, SERIAL_8N1, RX, TX);
     clear();
@@ -12,8 +17,7 @@ bool M5UnitQRCodeUART::begin(HardwareSerial *serial, int baud, uint8_t RX,
         _rx_buffer[_index] = _serial->read();
         _index++;
     }
-    if (_rx_buffer[0] == 0x24 && _rx_buffer[1] == 0x61 &&
-        _rx_buffer[2] == 0x41) {
+    if (_rx_buffer[0] == 0x24 && _rx_buffer[1] == 0x61 && _rx_buffer[2] == 0x41) {
         clear();
         return true;
     }
@@ -22,12 +26,10 @@ bool M5UnitQRCodeUART::begin(HardwareSerial *serial, int baud, uint8_t RX,
 }
 
 bool M5UnitQRCodeUART::parseData() {
-    if (_rx_buffer[0] == 0x33 && _rx_buffer[1] == 0x75 &&
-        _rx_buffer[2] == 0x02) {
+    if (_rx_buffer[0] == 0x33 && _rx_buffer[1] == 0x75 && _rx_buffer[2] == 0x02) {
         return false;
     }
-    if (_rx_buffer[0] == 0x22 && _rx_buffer[1] == 0x61 &&
-        _rx_buffer[2] == 0x41) {
+    if (_rx_buffer[0] == 0x22 && _rx_buffer[1] == 0x61 && _rx_buffer[2] == 0x41) {
         return false;
     }
     String data = String((char *)_rx_buffer);
